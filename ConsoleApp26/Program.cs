@@ -18,11 +18,26 @@ namespace ConsoleApp26
         public string Name { get; set; }
         public string Username { get; set; }
     }
-
+    class Button
+    {
+        public event Deleg Click;
+        public void InvokeClick()
+        {
+            Click.Invoke();
+        }
+    }
+    delegate void Deleg();
     class Program
     {
+        private static void Button_Click()
+        {
+            Console.WriteLine("Clicked");
+        }
         static void Main(string[] args)
         {
+            Button button = new Button();
+            button.Click += Button_Click;
+            button.InvokeClick();
             ///11111111111
             //        List<User> users = new List<User>()
             //        {
@@ -80,5 +95,7 @@ namespace ConsoleApp26
             //    Console.WriteLine($" {item.v1} {item.v2} {item.v3} ");
             //}
         }
+
+
     }
 }
